@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Moja Fotografia</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Moja Galeria Fotografii</h1>
+    <p>Amatorska fotografia – moje spojrzenie na świat</p>
+  </header>
+
+  <main>
+    <section class="gallery">
+      <img src="photos/zdjecie1.jpg" alt="Zdjęcie 1" onclick="openLightbox(this)">
+      <img src="photos/zdjecie2.jpg" alt="Zdjęcie 2" onclick="openLightbox(this)">
+      <img src="photos/zdjecie3.jpg" alt="Zdjęcie 3" onclick="openLightbox(this)">
+    </section>
+  </main>
+
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="close">&times;</span>
+    <img id="lightbox-img" class="lightbox-content">
+  </div>
+
+  <footer>
+    <p>© 2025 Sporak1974 | Kontakt: sporak1974@example.com</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
