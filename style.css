@@ -1,117 +1,103 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #111;
+  color: #eee;
   display: flex;
-  background-color: #fafafa;
 }
+
 .sidebar {
-  width: 200px;
-  background: #333;
-  color: #fff;
-  height: 100vh;
+  width: 220px;
+  background-color: #1b1b1b;
   padding: 20px;
-  box-sizing: border-box;
   position: fixed;
+  top: 60px;
+  bottom: 0;
+  left: 0;
+  overflow-y: auto;
 }
+
 .sidebar h2 {
+  color: #fff;
   text-align: center;
 }
+
 .sidebar ul {
   list-style: none;
   padding: 0;
 }
-.sidebar ul li {
-  margin: 15px 0;
+
+.sidebar li {
+  margin: 10px 0;
 }
-.sidebar ul li a {
-  color: #fff;
+
+.sidebar a {
+  color: #aaa;
   text-decoration: none;
+  font-weight: 500;
 }
-.sidebar ul li a:hover {
-  text-decoration: underline;
+
+.sidebar a:hover {
+  color: #00bcd4;
 }
-.content {
-  margin-left: 220px;
-  padding: 20px;
-  flex: 1;
+
+main {
+  margin-left: 240px;
+  padding: 80px 20px;
+  flex-grow: 1;
 }
+
 .gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
 }
+
 .gallery img {
-  width: 100%;
+  width: 250px;
+  height: auto;
   border-radius: 8px;
-  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
   transition: transform 0.3s;
 }
+
 .gallery img:hover {
   transform: scale(1.05);
 }
-.about {
-  margin-top: 60px;
-}
-.about-content {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-.profile-photo {
-  width: 160px;
-  border-radius: 50%;
-  border: 3px solid #ccc;
-}
-.contact {
-  margin-top: 60px;
-}
-form {
-  display: flex;
-  flex-direction: column;
-  max-width: 400px;
-}
-label {
-  margin-top: 10px;
-}
-input, textarea {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-button {
-  margin-top: 15px;
-  padding: 10px;
-  border: none;
-  background: #333;
-  color: #fff;
-  border-radius: 5px;
-  cursor: pointer;
-}
-button:hover {
-  background: #555;
-}
-.lightbox {
-  display: none;
+
+/* --- GÓRNA BELKA --- */
+.top-nav {
   position: fixed;
-  z-index: 1000;
-  left: 0;
   top: 0;
+  left: 0;
   width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.9);
+  background-color: #222;
+  color: white;
+  z-index: 1000;
+  padding: 10px 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+}
+
+.top-nav ul {
+  display: flex;
   justify-content: center;
-  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
-.lightbox-content {
-  max-width: 80%;
-  max-height: 80%;
-  border-radius: 8px;
+
+.top-nav li {
+  margin: 0 20px;
 }
-.close {
-  position: absolute;
-  top: 20px;
-  right: 40px;
-  font-size: 40px;
+
+.top-nav a {
   color: #fff;
-  cursor: pointer;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1em;
+  transition: color 0.3s;
+}
+
+.top-nav a:hover {
+  color: #00bcd4;
 }
