@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sporak1974 – Fotografia</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Sporak1974 – Fotografia</h1>
+    <nav>
+      <button class="filter-btn" data-category="all">Wszystkie</button>
+      <button class="filter-btn" data-category="krajobraz">Krajobraz</button>
+      <button class="filter-btn" data-category="miasto">Miasto</button>
+      <button class="filter-btn" data-category="rosliny">Rośliny</button>
+      <button class="filter-btn" data-category="astrofoto">Astrofoto</button>
+      <button class="filter-btn" data-category="osoby">Osoby</button>
+      <button class="filter-btn" data-category="rozne">Różne</button>
+    </nav>
+  </header>
+
+  <aside class="sidebar">
+    <section>
+      <h2>O mnie</h2>
+      <p>Jestem amatorem fotografii – uwielbiam uchwycić naturę, niebo i emocje w kadrze.</p>
+    </section>
+    <section>
+      <h2>Kontakt</h2>
+      <p><a href="mailto:diablo1sporak@gmail.com">diablo1sporak@gmail.com</a></p>
+    </section>
+  </aside>
+
+  <main class="gallery">
+    <div class="photo-card" data-category="krajobraz">
+      <img src="img/krajobraz/krajobraz1.jpg" alt="Krajobraz" />
+      <button class="like-btn">❤</button>
+      <span class="like-count">0</span>
+    </div>
+    <div class="photo-card" data-category="astrofoto">
+      <img src="img/astrofoto/astrofoto1.jpg" alt="Astrofotografia" />
+      <button class="like-btn">❤</button>
+      <span class="like-count">0</span>
+    </div>
+    <div class="photo-card" data-category="miasto">
+      <img src="img/miasto/miasto1.jpg" alt="Miasto nocą" />
+      <button class="like-btn">❤</button>
+      <span class="like-count">0</span>
+    </div>
+  </main>
+
+  <div id="lightbox" class="lightbox hidden">
+    <span class="close">&times;</span>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
