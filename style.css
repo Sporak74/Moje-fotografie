@@ -115,3 +115,6 @@ button:hover {
   color: #fff;
   cursor: pointer;
 }
+html {
+  scroll-behavior: smooth
+}
