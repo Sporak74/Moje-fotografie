@@ -58,7 +58,7 @@ h1 {
 
 main {
   margin-top: 180px; /* <-- odsunięcie od headera */
-  margin-left: 260px; /* <-- odsunięcie od sidebar */
+  margin-left: 360px; /* <-- odsunięcie od sidebar */
   padding: 20px;
 
 .gallery {
