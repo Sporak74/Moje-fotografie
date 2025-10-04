@@ -47,7 +47,7 @@ h1 {
   position: fixed;
   top: 60px; /* <-- odsunięcie od góry, żeby nie chowało headera */
   left: 0;
-  width: 200px;
+  width: 260px;
   height: calc(100% - 60px);
   background: #111;
   padding: 20px;
