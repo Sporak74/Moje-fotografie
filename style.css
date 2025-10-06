@@ -44,7 +44,7 @@ h1 {
   position: fixed;
   left: 0;
   top: 60px;
-  width: 200px;
+  width: 150px;
   background: #111;
   height: calc(100% - 60px);
   padding: 20px;
