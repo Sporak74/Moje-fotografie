@@ -9,7 +9,7 @@ body {
 header {
   position: fixed;
   top: 0;
-  width: 70%;
+  width: 100%;
   background: #111;
   display: flex;
   justify-content: space-between;
@@ -44,7 +44,7 @@ h1 {
   position: fixed;
   left: 0;
   top: 60px;
-  width: 150px;
+  width: 100px;
   background: #111;
   height: calc(100% - 60px);
   padding: 20px;
