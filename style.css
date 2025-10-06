@@ -44,7 +44,7 @@ h1 {
   position: fixed;
   left: 0;
   top: 60px;
-  width: 180px;
+  width: 150px;
   background: #111;
   height: calc(100% - 60px);
   padding: 20px;
@@ -52,7 +52,7 @@ h1 {
 }
 
 main {
-  margin-left: 200px;
+  margin-left: 100px;
   padding: 80px 20px;
 }
 
@@ -152,7 +152,7 @@ main {
   }
 
   main {
-    margin-left: 0;
+    margin-left: 100;
     padding-top: 100px;
  
   }
