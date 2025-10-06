@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.photo-card').forEach(el => observer.observe(el));
 
-  const toggle = document.querySelector('.menu-toggle');
   const sidebar = document.querySelector('.sidebar');
   toggle.addEventListener('click', () => sidebar.classList.toggle('active'));
 });
