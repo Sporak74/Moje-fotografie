@@ -122,12 +122,15 @@ main {
   background: rgba(0,0,0,0.9);
   justify-content: center;
   align-items: center;
-}
+  }
 
 .lightbox img {
   max-width: 90%;
   max-height: 80%;
   border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
 }
 
 .lightbox .close {
