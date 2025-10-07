@@ -1,106 +1,85 @@
-
-// script.js
-// Prosty, odporny na błędy skrypt do galerii
+// --- Po załadowaniu całej strony ---
 document.addEventListener('DOMContentLoaded', () => {
-  // --- Menu toggle (np. na mobilkach) ---
+
+  // === MENU (na mobilkach) ===
   const menuToggle = document.querySelector('.menu-toggle');
   const sidebar = document.querySelector('.sidebar');
   if (menuToggle && sidebar) {
     menuToggle.addEventListener('click', () => {
-      sidebar.classList.toggle('open');
-      menuToggle.classList.toggle('open');
+      sidebar.classList.toggle('active');
     });
   }
 
-  // --- Smooth scroll dla linków kotwicowych ---
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', (e) => {
-      const href = link.getAttribute('href');
-      if (href && href.startsWith('#')) {
-        const target = document.querySelector(href);
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          // zamknij sidebar po kliknięciu (opcjonalnie)
-          if (sidebar && sidebar.classList.contains('open')) sidebar.classList.remove('open');
-        }
-      }
-    });
-  });
-
-  // --- Like buttons (z zapisem w localStorage) ---
+  // === LAJKI ===
   document.querySelectorAll('.photo-card').forEach(card => {
     const img = card.querySelector('img');
     const btn = card.querySelector('.like-btn');
-    const likesSpan = card.querySelector('.likes');
-    if (!img || !btn || !likesSpan) return;
+    const counter = card.querySelector('.likes');
 
-    // klucz po nazwie pliku
-    const filename = img.getAttribute('src').split('/').pop();
-    const storageKey = 'likes:' + filename;
-    const saved = parseInt(localStorage.getItem(storageKey) ?? likesSpan.textContent ?? '0', 10);
-    likesSpan.textContent = Number.isNaN(saved) ? 0 : saved;
+    if (!img || !btn || !counter) return;
 
+    // Unikalny klucz na podstawie nazwy pliku zdjęcia
+    const filename = img.src.split('/').pop();
+    const storageKey = `likes_${filename}`;
+
+    // Wczytaj istniejącą wartość z localStorage
+    let likes = parseInt(localStorage.getItem(storageKey) || '0', 10);
+    counter.textContent = likes;
+
+    // Obsługa kliknięcia w serduszko
     btn.addEventListener('click', () => {
-      let val = parseInt(likesSpan.textContent || '0', 10);
-      if (Number.isNaN(val)) val = 0;
-      val += 1;
-      likesSpan.textContent = val;
-      localStorage.setItem(storageKey, val);
+      likes++;
+      counter.textContent = likes;
+      localStorage.setItem(storageKey, likes);
 
-      // krótka animacja feedbacku (jeśli przeglądarka wspiera)
-      try {
-        btn.animate([
-          { transform: 'scale(1)' },
-          { transform: 'scale(1.2)' },
-          { transform: 'scale(1)' }
-        ], { duration: 180 });
-      } catch (_) { /* ignore */ }
+      // Mała animacja kliknięcia
+      btn.style.transform = 'scale(1.3)';
+      setTimeout(() => btn.style.transform = 'scale(1)', 150);
     });
   });
 
-  // --- Lightbox ---
+  // === LIGHTBOX ===
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
-  const lightboxClose = lightbox ? lightbox.querySelector('.close') : null;
+  const lightboxClose = lightbox?.querySelector('.close');
 
-  document.querySelectorAll('.gallery img').forEach(img => {
-    img.style.cursor = 'zoom-in';
-    img.addEventListener('click', () => {
-      if (!lightbox || !lightboxImg) return;
-      lightboxImg.src = img.src;
-      lightbox.classList.add('open');
-      document.body.style.overflow = 'hidden';
+  if (lightbox && lightboxImg) {
+    document.querySelectorAll('.gallery img').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      });
     });
-  });
 
-  function closeLightbox() {
-    if (!lightbox) return;
-    lightbox.classList.remove('open');
-    document.body.style.overflow = '';
-    // usuń src po krótkim czasie (opcjonalnie)
-    setTimeout(() => { if (lightboxImg) lightboxImg.src = ''; }, 200);
-  }
+    // Zamknięcie lightboxa
+    const closeLightbox = () => {
+      lightbox.style.display = 'none';
+      lightboxImg.src = '';
+      document.body.style.overflow = '';
+    };
 
-  if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
-  if (lightbox) {
-    lightbox.addEventListener('click', (e) => {
+    lightboxClose?.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => {
       if (e.target === lightbox) closeLightbox();
     });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+    });
   }
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeLightbox();
-  });
-});
-// Efekt pojawiania się zdjęć przy scrollowaniu
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.2 });
 
-document.querySelectorAll('.photo-card').forEach(card => {
-  observer.observe(card);
+  // === ANIMACJA POJAWIANIA SIĘ ZDJĘĆ ===
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target); // obserwuj tylko raz
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.photo-card').forEach(card => {
+    observer.observe(card);
+  });
+
 });
