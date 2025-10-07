@@ -1,7 +1,6 @@
-// --- Po załadowaniu całej strony ---
 document.addEventListener('DOMContentLoaded', () => {
 
-  // === MENU (na mobilkach) ===
+  // === MENU (mobilne) ===
   const menuToggle = document.querySelector('.menu-toggle');
   const sidebar = document.querySelector('.sidebar');
   if (menuToggle && sidebar) {
@@ -10,30 +9,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // === LAJKI ===
+  // === LAJKI (zapis w localStorage) ===
   document.querySelectorAll('.photo-card').forEach(card => {
     const img = card.querySelector('img');
     const btn = card.querySelector('.like-btn');
     const counter = card.querySelector('.likes');
-
     if (!img || !btn || !counter) return;
 
-    // Unikalny klucz na podstawie nazwy pliku zdjęcia
-    const filename = img.src.split('/').pop();
-    const storageKey = `likes_${filename}`;
+    // klucz localStorage na podstawie nazwy pliku (nie pełnej ścieżki)
+    const filename = img.getAttribute('src').split('/').pop();
+    const key = `like_${filename}`;
 
-    // Wczytaj istniejącą wartość z localStorage
-    let likes = parseInt(localStorage.getItem(storageKey) || '0', 10);
+    // wczytanie poprzedniej wartości
+    let likes = parseInt(localStorage.getItem(key) || '0', 10);
     counter.textContent = likes;
 
-    // Obsługa kliknięcia w serduszko
+    // kliknięcie serduszka
     btn.addEventListener('click', () => {
       likes++;
       counter.textContent = likes;
-      localStorage.setItem(storageKey, likes);
+      localStorage.setItem(key, likes);
 
-      // Mała animacja kliknięcia
-      btn.style.transform = 'scale(1.3)';
+      // animacja pulsu
+      btn.style.transform = 'scale(1.4)';
       setTimeout(() => btn.style.transform = 'scale(1)', 150);
     });
   });
@@ -52,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Zamknięcie lightboxa
     const closeLightbox = () => {
       lightbox.style.display = 'none';
       lightboxImg.src = '';
@@ -73,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        observer.unobserve(entry.target); // obserwuj tylko raz
+        observer.unobserve(entry.target); // przestań obserwować po pierwszym razie
       }
     });
   }, { threshold: 0.2 });
