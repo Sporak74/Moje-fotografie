@@ -103,3 +103,20 @@ document.addEventListener('DOMContentLoaded', () => {
   // Początkowe odświeżenie łącznej liczby lajków
   updateTotalLikes();
 });
+// Efekt pojawiania się ikon społecznościowych przy przewijaniu
+document.addEventListener("DOMContentLoaded", () => {
+  const socialLinks = document.querySelector(".social-links");
+
+  if (socialLinks) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          socialLinks.classList.add("visible");
+          observer.unobserve(socialLinks); // tylko raz
+        }
+      });
+    }, { threshold: 0.2 });
+
+    observer.observe(socialLinks);
+  }
+});
