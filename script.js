@@ -1,130 +1,89 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
 
-  // === MENU (mobilne) ===
-  const menuToggle = document.querySelector('.menu-toggle');
-  const sidebar = document.querySelector('.sidebar');
-  if (menuToggle && sidebar) {
-    menuToggle.addEventListener('click', () => {
-      sidebar.classList.toggle('active');
-    });
-  }
+  // --- Efekt lightbox (powiększanie zdjęć) ---
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const closeBtn = document.querySelector(".lightbox .close");
 
-  // === LAJKI (zapis w localStorage) ===
-  let totalLikes = 0;
-  const totalLikesContainer = document.createElement('div');
-  totalLikesContainer.id = 'total-likes';
-  totalLikesContainer.style.textAlign = 'center';
-  totalLikesContainer.style.margin = '40px 0 80px 0';
-  totalLikesContainer.style.fontSize = '1.3rem';
-  totalLikesContainer.style.color = '#ff6666';
-  totalLikesContainer.style.fontWeight = 'bold';
-  totalLikesContainer.textContent = 'Łączna liczba polubień: 0';
-  document.body.appendChild(totalLikesContainer);
-
-  function updateTotalLikes() {
-    const allKeys = Object.keys(localStorage).filter(k => k.startsWith('like_'));
-    totalLikes = allKeys.reduce((sum, key) => sum + parseInt(localStorage.getItem(key) || '0', 10), 0);
-    totalLikesContainer.textContent = `Łączna liczba polubień: ${totalLikes}`;
-  }
-
-  document.querySelectorAll('.photo-card').forEach(card => {
-    const img = card.querySelector('img');
-    const btn = card.querySelector('.like-btn');
-    const counter = card.querySelector('.likes');
-    if (!img || !btn || !counter) return;
-
-    // klucz localStorage na podstawie nazwy pliku
-    const filename = img.getAttribute('src').split('/').pop();
-    const key = `like_${filename}`;
-
-    // wczytanie poprzedniej wartości
-    let likes = parseInt(localStorage.getItem(key) || '0', 10);
-    counter.textContent = likes;
-
-    // aktualizacja łącznej liczby lajków po wczytaniu
-    updateTotalLikes();
-
-    // kliknięcie serduszka
-    btn.addEventListener('click', () => {
-      likes++;
-      counter.textContent = likes;
-      localStorage.setItem(key, likes);
-      updateTotalLikes();
-
-      // animacja serduszka
-      btn.style.transform = 'scale(1.4)';
-      setTimeout(() => btn.style.transform = 'scale(1)', 150);
+  document.querySelectorAll(".photo-card img").forEach(img => {
+    img.addEventListener("click", () => {
+      lightbox.style.display = "flex";
+      lightboxImg.src = img.src;
+      document.body.style.overflow = "hidden"; // blokuj scroll przy otwartym lightboxie
     });
   });
 
-  // === LIGHTBOX ===
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
-  const lightboxClose = lightbox?.querySelector('.close');
+  closeBtn.addEventListener("click", () => {
+    lightbox.style.display = "none";
+    document.body.style.overflow = "auto";
+  });
 
-  if (lightbox && lightboxImg) {
-    document.querySelectorAll('.gallery img').forEach(img => {
-      img.addEventListener('click', () => {
-        lightboxImg.src = img.src;
-        lightbox.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-      });
-    });
+  lightbox.addEventListener("click", e => {
+    if (e.target === lightbox) {
+      lightbox.style.display = "none";
+      document.body.style.overflow = "auto";
+    }
+  });
 
-    const closeLightbox = () => {
-      lightbox.style.display = 'none';
-      lightboxImg.src = '';
-      document.body.style.overflow = '';
-    };
+  // --- Efekt pojawiania się zdjęć przy przewijaniu ---
+  const photoCards = document.querySelectorAll(".photo-card");
 
-    lightboxClose?.addEventListener('click', closeLightbox);
-    lightbox.addEventListener('click', e => {
-      if (e.target === lightbox) closeLightbox();
-    });
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeLightbox();
-    });
-  }
-
-  // === ANIMACJA POJAWIANIA SIĘ ZDJĘĆ ===
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target); // obserwuj tylko raz
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.2 });
 
-  document.querySelectorAll('.photo-card').forEach(card => {
-    observer.observe(card);
-  });
+  photoCards.forEach(card => observer.observe(card));
 
-  // Początkowe odświeżenie łącznej liczby lajków
-  updateTotalLikes();
-});
-// Efekt pojawiania się ikon społecznościowych przy przewijaniu
-document.addEventListener("DOMContentLoaded", () => {
-  const socialLinks = document.querySelector(".social-links");
-
-  if (socialLinks) {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          socialLinks.classList.add("visible");
-          observer.unobserve(socialLinks); // tylko raz
-        }
-      });
-    }, { threshold: 0.2 });
-
-    observer.observe(socialLinks);
-  }
-});
-// Automatycznie dodaje "loading=lazy" do wszystkich zdjęć
-document.addEventListener("DOMContentLoaded", () => {
+  // --- Automatyczne dodanie loading="lazy" do wszystkich zdjęć ---
   document.querySelectorAll("img").forEach(img => {
     if (!img.hasAttribute("loading")) {
       img.setAttribute("loading", "lazy");
     }
   });
+
+  // --- System lajków z zapisem w localStorage ---
+  const likeButtons = document.querySelectorAll(".like-btn");
+
+  likeButtons.forEach((btn, index) => {
+    const photoCard = btn.closest(".photo-card");
+    const likesSpan = photoCard.querySelector(".likes");
+    const imgSrc = photoCard.querySelector("img").src;
+    const storageKey = `likes_${imgSrc}`;
+
+    // Wczytaj lajki z localStorage
+    const savedLikes = localStorage.getItem(storageKey);
+    if (savedLikes) {
+      likesSpan.textContent = savedLikes;
+    }
+
+    // Kliknięcie w serduszko
+    btn.addEventListener("click", () => {
+      let currentLikes = parseInt(likesSpan.textContent) || 0;
+      currentLikes++;
+      likesSpan.textContent = currentLikes;
+      localStorage.setItem(storageKey, currentLikes);
+      btn.style.transform = "scale(1.3)";
+      setTimeout(() => btn.style.transform = "scale(1)", 200);
+    });
+  });
+
+  // --- Efekt fade-in dla ikon społecznościowych ---
+  const socialLinks = document.querySelector(".social-links");
+  if (socialLinks) {
+    const socialObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          socialLinks.classList.add("visible");
+          socialObserver.unobserve(socialLinks);
+        }
+      });
+    }, { threshold: 0.3 });
+    socialObserver.observe(socialLinks);
+  }
+
 });
