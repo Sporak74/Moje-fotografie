@@ -215,7 +215,7 @@ img {
 }
 /* Poprawka rozmiaru logo */
 .sidebar-logo {
-  max-width: 90px;
+  max-width: 180px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
