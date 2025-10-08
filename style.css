@@ -278,3 +278,16 @@ img {
   opacity: 1;
   transform: translateY(0);
 }
+@media (max-width: 768px) {
+  .photo-card img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .photo-card {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    animation: none;
+    transition: none;
+  }
+}
