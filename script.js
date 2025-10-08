@@ -1,3 +1,7 @@
+// ===============================
+//  GALERIA SPORAK1974 - SKRYPT
+// ===============================
+
 document.addEventListener("DOMContentLoaded", () => {
 
   // --- Efekt lightbox (powiększanie zdjęć) ---
