@@ -151,3 +151,14 @@ body {
     box-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
   }
 }
+/* Efekt pojawiania się ikon społecznościowych */
+.social-links {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.social-links.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
