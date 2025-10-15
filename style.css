@@ -1,96 +1,224 @@
-body {
-  font-family: 'Segoe UI', Roboto, sans-serif;
-  background: linear-gradient(180deg, #111 0%, #222 100%);
-  color: #eee;
+/* === Ogólne ustawienia === */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-.gallery-section {
+html {
+  scroll-behavior: smooth;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+body {
+  background: linear-gradient(160deg, #0e0e0e 0%, #1a1a1a 100%);
+  color: #eaeaea;
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+}
+
+/* === Nagłówek === */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(20, 20, 20, 0.95);
+  padding: 10px 0;
   text-align: center;
-  padding: 40px 20px;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+header h1 {
+  font-size: 1.8rem;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+/* === Menu kategorii === */
+.top-menu ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.top-menu a {
+  text-decoration: none;
+  color: #ccc;
+  background: rgba(40,40,40,0.7);
+  padding: 6px 14px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.top-menu a:hover {
+  background: #ff4444;
+  color: #fff;
+}
+
+/* === Panel boczny === */
+.sidebar {
+  position: fixed;
+  top: 90px;
+  left: 0;
+  width: 250px;
+  background: rgba(25,25,25,0.9);
+  padding: 20px;
+  height: calc(100vh - 90px);
+  overflow-y: auto;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.4);
+}
+
+.sidebar h2 {
+  margin: 15px 0 8px;
+  color: #fff;
+  border-bottom: 1px solid #333;
+  padding-bottom: 4px;
+}
+
+.sidebar p, .sidebar a {
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.sidebar-logo {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* === Główna zawartość === */
+main {
+  margin-top: 100px;
+  margin-left: 270px;
+  padding: 20px;
+  flex: 1;
+}
+
+/* === Sekcje galerii === */
+.gallery-section {
+  margin-bottom: 50px;
 }
 
 .gallery-section h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  background: linear-gradient(90deg, #66ff99, #33ccff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  border-left: 4px solid #ff4444;
+  padding-left: 10px;
+  margin-bottom: 15px;
+  color: #fff;
 }
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 15px;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 .photo-card {
   position: relative;
   overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 10px;
+  background: #222;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease;
 }
 
 .photo-card:hover {
   transform: scale(1.03);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.6);
 }
 
 .photo-card img {
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 12px;
-  transition: transform 0.5s ease;
+  transition: transform 0.3s ease;
 }
 
 .photo-card:hover img {
   transform: scale(1.05);
 }
 
-.caption {
-  position: absolute;
-  bottom: 45px;
-  left: 10px;
-  color: #fff;
-  background: rgba(0,0,0,0.5);
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
+/* === Lajki === */
 .like-btn {
   position: absolute;
-  bottom: 10px;
-  right: 40px;
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
+  bottom: 8px;
+  left: 8px;
+  background: rgba(0,0,0,0.6);
   border: none;
+  color: #ccc;
+  font-size: 1.2rem;
   border-radius: 50%;
-  padding: 8px;
   cursor: pointer;
-  font-size: 18px;
-  transition: transform 0.2s, background 0.3s;
+  transition: all 0.3s ease;
+  padding: 5px 8px;
 }
 
-.like-btn:hover {
-  transform: scale(1.2);
-  background: rgba(255, 0, 0, 0.6);
+.like-btn.liked {
+  color: #ff4444;
+  transform: scale(1.3);
 }
 
 .likes {
   position: absolute;
-  bottom: 14px;
-  right: 12px;
-  color: #fff;
-  font-size: 14px;
+  bottom: 10px;
+  left: 38px;
+  color: #ccc;
+  font-size: 0.9rem;
 }
 
-.liked {
-  color: #ff4d4d;
-  transform: scale(1.3);
+/* === Lightbox === */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0,0,0,0.9);
+}
+
+.lightbox-content {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+  max-height: 80vh;
+  border-radius: 10px;
+}
+
+.close {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  color: #fff;
+  font-size: 35px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close:hover {
+  color: #ff4444;
+}
+
+/* === Responsywność === */
+@media (max-width: 900px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-top: 90px;
+  }
+
+  main {
+    margin-left: 0;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
 }
