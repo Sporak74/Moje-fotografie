@@ -205,7 +205,7 @@ main {
   color: #ff4444;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   header {
     position: fixed;
     top: 0;
