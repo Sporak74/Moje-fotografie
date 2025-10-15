@@ -239,3 +239,33 @@ main {
   transform: scale(1.2);
   filter: brightness(1.2);
 }
+/* Logo w panelu bocznym */
+.logo-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sidebar-logo {
+  max-width: 120px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+/* Ikony social media */
+.social-links {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.social-links a img {
+  width: 28px;
+  height: 28px;
+  filter: brightness(0.85);
+  transition: transform 0.3s, filter 0.3s;
+}
+
+.social-links a:hover img {
+  transform: scale(1.15);
+  filter: brightness(1.3);
+}
