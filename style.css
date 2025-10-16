@@ -50,7 +50,7 @@ body{
 /* Photo gallery (used in category pages) */
 .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .photo-card{background:var(--panel);border-radius:10px;overflow:hidden;position:relative}
-.photo-card .imgwrap{width:100%;aspect-ratio:4/3;overflow:hidden;display:block;position:relative}
+.photo-card .imgwrap{width:100%;aspect-ratio:16/9;overflow:hidden;display:block;position:relative}
 .photo-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .28s ease, filter .28s ease}
 .photo-card .overlay{position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,0.0),rgba(0,0,0,0.2));opacity:0;transition:opacity .22s ease}
 .photo-card:hover img{transform:scale(1.05);filter:brightness(.78)}
