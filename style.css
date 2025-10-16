@@ -89,38 +89,35 @@ a:focus{outline:2px solid rgba(255,255,255,0.06);outline-offset:3px}
 /* --- Lightbox (pełnoekranowy podgląd zdjęcia) --- */
 .lightbox {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: rgba(0,0,0,0.9);
-  display: flex;
-  align-items: center;
+  display: none;
   justify-content: center;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  z-index: 9999;
+  align-items: center;
+  z-index: 1000;
 }
 
 .lightbox.active {
-  visibility: visible;
-  opacity: 1;
+  display: flex;
 }
 
 .lightbox img {
   max-width: 90%;
   max-height: 90%;
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(255,255,255,0.2);
-  cursor: zoom-out;
+  box-shadow: 0 0 20px rgba(255,255,255,0.3);
 }
 
 .lightbox-close {
   position: absolute;
   top: 20px;
-  right: 30px;
-  font-size: 32px;
-  color: #ccc;
+  right: 40px;
+  color: white;
+  font-size: 2rem;
   cursor: pointer;
-  user-select: none;
 }
 
 @media (max-width:600px){
