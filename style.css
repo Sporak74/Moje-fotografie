@@ -154,17 +154,42 @@ h2 {
   gap: 10px;
 }
 
+.socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
 .socials a {
-  display: inline-block;
-  color: #ccc;
-  font-size: 1.4rem;
-  margin: 0 8px;
-  transition: color 0.3s;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #222;
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
 .socials a:hover {
-  color: #fff;
+  background: #444;
+  transform: scale(1.1);
 }
+
+.socials img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(200%);
+  transition: filter 0.3s ease;
+}
+
+.socials a:hover img {
+  filter: none;
+}
+
 
 .copyright {
   font-size: 0.9rem;
