@@ -53,13 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target === lightbox) lightbox.classList.remove('active');
   });
 });
-// Powiększanie zdjęcia po kliknięciu
-document.querySelectorAll('.gallery img').forEach(img => {
-  img.addEventListener('click', () => {
-    const overlay = document.createElement('div');
-    overlay.classList.add('overlay');
-    overlay.innerHTML = `<img src="${img.src}" alt="" class="overlay-image">`;
-    document.body.appendChild(overlay);
-    overlay.addEventListener('click', () => overlay.remove());
+  // zamykanie lightboxa
+  closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
+  lightbox.addEventListener('click', e => {
+    if (e.target === lightbox) lightbox.classList.remove('active');
   });
 });
