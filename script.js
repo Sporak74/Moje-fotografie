@@ -84,3 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // closeBtn obsługuje kliknięcie:
   closeBtn.addEventListener('click', closeLightbox);
 });
+document.getElementById("nav-toggle").addEventListener("click", function() {
+  document.getElementById("top-nav").classList.toggle("open");
+});
