@@ -86,3 +86,46 @@ copyright{color:var(--muted)}
 
 /* Small helpers */
 a:focus{outline:2px solid rgba(255,255,255,0.06);outline-offset:3px}
+/* --- Lightbox (pełnoekranowy podgląd zdjęcia) --- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 9999;
+}
+
+.lightbox.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.2);
+  cursor: zoom-out;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 32px;
+  color: #ccc;
+  cursor: pointer;
+  user-select: none;
+}
+
+@media (max-width:600px){
+  .lightbox img{
+    max-width: 95%;
+    max-height: 85%;
+  }
+}
