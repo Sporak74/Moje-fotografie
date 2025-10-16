@@ -1,4 +1,4 @@
-// script.js — z lightboxem i obsługą menu/like
+// script.js — lightbox + obsługa menu/like (całość)
 document.addEventListener('DOMContentLoaded', () => {
   // --- Nawigacja mobilna ---
   const navToggle = document.getElementById('nav-toggle');
@@ -27,29 +27,60 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- Lightbox: pełnoekranowy podgląd ---
+  // --- Lightbox: tworzymy raz i używamy delegacji kliknięć ---
   const lightbox = document.createElement('div');
   lightbox.className = 'lightbox';
   lightbox.innerHTML = `
-    <span class="lightbox-close">&times;</span>
-    <img src="" alt="Podgląd zdjęcia">
+    <button class="lightbox-close" aria-label="Zamknij">&times;</button>
+    <div class="lightbox-content"><img src="" alt="Podgląd zdjęcia"></div>
   `;
   document.body.appendChild(lightbox);
 
   const lightboxImg = lightbox.querySelector('img');
   const closeBtn = lightbox.querySelector('.lightbox-close');
 
-  // kliknięcie w zdjęcie otwiera podgląd
-  document.querySelectorAll('.gallery img').forEach(img => {
-    img.addEventListener('click', () => {
-      lightboxImg.src = img.src;
-      lightbox.classList.add('active');
-    });
+  // Funkcja otwierająca (przyjmuje URL obrazu)
+  function openLightbox(url, alt = '') {
+    lightboxImg.src = url;
+    lightboxImg.alt = alt;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden'; // blokada scrolla tła
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    lightboxImg.src = '';
+    document.body.style.overflow = ''; // przywrócenie scrolla
+  }
+
+  // Delegacja: łapiemy kliknięcie wszędzie w dokumencie, filtruemy .gallery img
+  document.addEventListener('click', (e) => {
+    const clicked = e.target;
+
+    // jeśli kliknięto w przycisk zamykania lub tło lightboxa -> zamknij
+    if (clicked === closeBtn || clicked === lightbox) {
+      closeLightbox();
+      return;
+    }
+
+    // znajdź najbliższy element <img> wewnątrz .gallery (obsługuje <picture> też)
+    const img = clicked.closest && clicked.closest('.gallery img');
+    if (!img) return;
+
+    e.preventDefault();
+
+    // obsługa srcset/picture: jeśli jest data-large użyj go, inaczej img.currentSrc lub src
+    const large = img.dataset.large || img.currentSrc || img.src;
+    const alt = img.alt || '';
+    openLightbox(large, alt);
   });
 
-  // zamykanie lightboxa
-  closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
-  lightbox.addEventListener('click', e => {
-    if (e.target === lightbox) lightbox.classList.remove('active');
+  // Zamknięcie przez Esc
+  document.addEventListener('keyup', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
   });
+
+  // Kliknięcie w wolną przestrzeń lightboxa zamyka (już obsługujemy powyżej przy clicked === lightbox)
+  // closeBtn obsługuje kliknięcie:
+  closeBtn.addEventListener('click', closeLightbox);
 });
