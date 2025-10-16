@@ -87,25 +87,27 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById("nav-toggle").addEventListener("click", function() {
   document.getElementById("top-nav").classList.toggle("open");
 });
-// --- Powiększanie zdjęć ---
-const images = document.querySelectorAll('.gallery img');
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightbox-img');
-const closeBtn = document.querySelector('.lightbox .close');
+// --- Lightbox — powiększanie zdjęć ---
+document.addEventListener("DOMContentLoaded", () => {
+  const images = document.querySelectorAll(".gallery img");
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const closeBtn = document.querySelector(".lightbox .close");
 
-images.forEach(img => {
-  img.addEventListener('click', () => {
-    lightbox.style.display = 'flex';
-    lightboxImg.src = img.src;
+  images.forEach(img => {
+    img.addEventListener("click", () => {
+      lightbox.style.display = "flex";
+      lightboxImg.src = img.src;
+    });
   });
-});
 
-closeBtn.addEventListener('click', () => {
-  lightbox.style.display = 'none';
-});
+  closeBtn.addEventListener("click", () => {
+    lightbox.style.display = "none";
+  });
 
-lightbox.addEventListener('click', (e) => {
-  if (e.target === lightbox) {
-    lightbox.style.display = 'none';
-  }
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+      lightbox.style.display = "none";
+    }
+  });
 });
