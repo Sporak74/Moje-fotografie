@@ -53,9 +53,3 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target === lightbox) lightbox.classList.remove('active');
   });
 });
-  // zamykanie lightboxa
-  closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
-  lightbox.addEventListener('click', e => {
-    if (e.target === lightbox) lightbox.classList.remove('active');
-  });
-});
