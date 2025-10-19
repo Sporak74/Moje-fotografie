@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Moje fotografie — Sporak1974</title>
-  <link rel="stylesheet" href="style.css">
-  <script defer src="script.js"></script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Moje fotografie — Sporak1974</title>
+<link rel="stylesheet" href="style.css">
+<script defer src="script.js"></script>
 </head>
 <body>
+
 <header class="site-header">
   <div class="container header-inner">
     <div class="brand">
       <h1>Moje fotografie — Sporak1974</h1>
+      <p class="tagline">Zdjęcia w odcieniach szarości — krajobraz, miasto, przyroda i nie tylko</p>
     </div>
+    <button id="nav-toggle" class="nav-toggle" aria-label="Otwórz menu">☰</button>
     <nav class="top-nav" id="top-nav">
       <ul>
-        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html" class="active">Home</a></li>
         <li><a href="krajobraz.html">Krajobraz</a></li>
         <li><a href="miasto.html">Miasto</a></li>
         <li><a href="rosliny.html">Rośliny</a></li>
@@ -29,28 +32,27 @@
 </header>
 
 <section class="hero">
-  <div class="container">
-    <img src="logo.png" alt="Logo Sporak1974" class="hero-logo">
-  </div>
+  <img src="logo.png" alt="Logo Sporak1974" class="hero-logo">
 </section>
 
 <main class="container main-content">
   <section class="about">
     <h2>O mnie</h2>
-    <p>Cześć — jestem Rafał. Fotografuję krajobrazy, miasta, rośliny, nocne niebo, przyrodę i wiele więcej. Na tej stronie znajdziesz wybór moich zdjęć. Jeśli chcesz, napisz: <a href="mailto:diablo1sporak@gmail.com">diablo1sporak@gmail.com</a></p>
+    <p>Cześć — jestem Rafał. Fotografuję krajobrazy, miasta, rośliny, nocne niebo, przyrodę i wiele więcej.
+    Na tej stronie znajdziesz wybór moich zdjęć. Jeśli chcesz, napisz: 
+    <a href="mailto:diablo1sporak@gmail.com">diablo1sporak@gmail.com</a></p>
   </section>
 
   <section class="featured gallery-preview">
     <h2>Wybrane galerie</h2>
-    <div class="gallery-grid">
-<div class="card"><a href="krajobraz.html"><img src="zdjecia/krajobraz/krajobraz1.jpg" alt="krajobraz" data-full="zdjecia/krajobraz/krajobraz1.jpg"><span>Krajobraz</span></a></div>
-<div class="card"><a href="miasto.html"><img src="zdjecia/miasto/miasto1.jpg" alt="miasto" data-full="zdjecia/miasto/miasto1.jpg"><span>Miasto</span></a></div>
-<div class="card"><a href="rosliny.html"><img src="zdjecia/rosliny/rosliny1.jpg" alt="rosliny" data-full="zdjecia/rosliny/rosliny1.jpg"><span>Rosliny</span></a></div>
-<div class="card"><a href="astrofoto.html"><img src="zdjecia/astrofoto/astrofoto1.jpg" alt="astrofoto" data-full="zdjecia/astrofoto/astrofoto1.jpg"><span>Astrofoto</span></a></div>
-<div class="card"><a href="osoby.html"><img src="zdjecia/osoby/osoby1.jpg" alt="osoby" data-full="zdjecia/osoby/osoby1.jpg"><span>Osoby</span></a></div>
-<div class="card"><a href="rozne.html"><img src="zdjecia/rozne/rozne1.jpg" alt="rozne" data-full="zdjecia/rozne/rozne1.jpg"><span>Rozne</span></a></div>
-<div class="card"><a href="gory.html"><img src="zdjecia/gory/gory1.jpg" alt="gory" data-full="zdjecia/gory/gory1.jpg"><span>Gory</span></a></div>
-
+    <div class="grid-preview hero-categories">
+      <a class="preview-card" href="krajobraz.html"><div class="imgwrap"><img src="zdjecia/krajobraz/krajobraz1.jpg" alt="Krajobraz"></div><span>Krajobraz</span></a>
+      <a class="preview-card" href="miasto.html"><div class="imgwrap"><img src="zdjecia/miasto/miasto1.jpg" alt="Miasto"></div><span>Miasto</span></a>
+      <a class="preview-card" href="rosliny.html"><div class="imgwrap"><img src="zdjecia/rosliny/roslina1.jpg" alt="Rośliny"></div><span>Rośliny</span></a>
+      <a class="preview-card" href="astrofoto.html"><div class="imgwrap"><img src="zdjecia/astrofoto/astro1.jpg" alt="Astrofoto"></div><span>Astrofoto</span></a>
+      <a class="preview-card" href="osoby.html"><div class="imgwrap"><img src="zdjecia/osoby/osoba1.jpg" alt="Osoby"></div><span>Osoby</span></a>
+      <a class="preview-card" href="rozne.html"><div class="imgwrap"><img src="zdjecia/rozne/rozne1.jpg" alt="Różne"></div><span>Różne</span></a>
+      <a class="preview-card" href="gory.html"><div class="imgwrap"><img src="zdjecia/gory/gory1.jpg" alt="Góry"></div><span>Góry</span></a>
     </div>
   </section>
 </main>
@@ -58,26 +60,19 @@
 <footer class="site-footer">
   <div class="container footer-inner">
     <div class="socials">
-      <a href="https://facebook.com/sporak1974" target="_blank" rel="noopener" aria-label="Facebook">
-        <img src="ikony/facebook.png" alt="Facebook">
-      </a>
-      <a href="https://instagram.com/sporak1974" target="_blank" rel="noopener" aria-label="Instagram">
-        <img src="ikony/instagram.png" alt="Instagram">
-      </a>
-      <a href="https://www.eyeem.com/u/sporak1974" target="_blank" rel="noopener" aria-label="EyeEm">
-        <img src="ikony/eyeem.png" alt="EyeEm">
-      </a>
+      <a href="https://facebook.com/sporak1974" target="_blank" rel="noopener"><img src="ikony/facebook.png" alt="Facebook"></a>
+      <a href="https://instagram.com/sporak1974" target="_blank" rel="noopener"><img src="ikony/instagram.png" alt="Instagram"></a>
+      <a href="https://www.eyeem.com/u/sporak1974" target="_blank" rel="noopener"><img src="ikony/eyeem.png" alt="EyeEm"></a>
     </div>
     <div class="copyright">© Sporak1974 — wszystkie prawa zastrzeżone</div>
   </div>
 </footer>
 
-<div id="lightbox" class="lightbox" role="dialog" aria-hidden="true">
-  <div class="inner">
-    <button class="close" aria-label="zamknij">✕</button>
-    <img src="" alt="Podgląd zdjęcia">
-    <div class="caption"></div>
-  </div>
+<div id="lightbox" class="lightbox">
+  <span class="close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
+  <div class="like-btn-lightbox" data-id=""><span class="heart">❤️</span> <span class="like-count">0</span></div>
 </div>
+
 </body>
 </html>
