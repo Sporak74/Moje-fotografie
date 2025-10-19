@@ -45,3 +45,21 @@ document.addEventListener('DOMContentLoaded', () => {
   lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
   document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && lightbox.style.display === 'flex') closeLightbox(); });
 });
+// --- Lajki (serduszka) ---
+document.addEventListener("DOMContentLoaded", () => {
+  const likeButtons = document.querySelectorAll(".like-btn");
+
+  likeButtons.forEach(btn => {
+    const imgId = btn.dataset.id;
+    const countEl = btn.querySelector(".like-count");
+    let likes = localStorage.getItem(`likes_${imgId}`) || 0;
+    countEl.textContent = likes;
+
+    btn.addEventListener("click", () => {
+      likes = parseInt(likes) + 1;
+      localStorage.setItem(`likes_${imgId}`, likes);
+      countEl.textContent = likes;
+      btn.classList.add("liked");
+    });
+  });
+});
