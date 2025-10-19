@@ -1,63 +1,38 @@
 :root{
-  --bg:#0f0f0f; --panel:#121212; --text:#e6e6e6; --accent:#ff7a00;
-}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Segoe UI,Roboto,system-ui;line-height:1.4}
-.container{max-width:1100px;margin:0 auto;padding:0 1rem}
-.site-header{background:linear-gradient(90deg,#000,var(--panel));position:sticky;top:0;z-index:100;padding:0.6rem 0}
-.header-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.brand h1{margin:0;font-size:1.1rem}
-.top-nav ul{display:flex;gap:0.8rem;margin:0;padding:0;list-style:none;align-items:center}
-.top-nav a{color:var(--text);text-decoration:none;padding:0.4rem 0.6rem;border-radius:6px;display:inline-block}
-.top-nav a.active, .top-nav a:hover{background:rgba(255,122,0,0.08);color:var(--accent)}
-
-.gallery-page{padding:1.6rem 0}
-.gallery-page h2{margin-top:0}
-.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1rem}
-.gallery-grid .card{background:var(--panel);border-radius:10px;overflow:hidden;padding:0.4rem;display:flex;flex-direction:column;align-items:center}
-.gallery-grid img{width:100%;height:220px;object-fit:cover;border-radius:8px;cursor:pointer;transition:transform .28s ease,box-shadow .28s ease}
-.gallery-grid img:hover{transform:scale(1.03);box-shadow:0 10px 30px rgba(0,0,0,0.6)}
-.card span{display:block;padding:0.5rem 0;color:#cfcfcf;font-size:0.95rem}
-
-.lightbox{display:none;position:fixed;inset:0;z-index:200;align-items:center;justify-content:center;background:rgba(0,0,0,0.95)}
-.lightbox .inner{position:relative;max-width:95%;max-height:95%;display:flex;flex-direction:column;align-items:center;gap:.6rem}
-.lightbox img{max-width:calc(100vw - 80px);max-height:calc(100vh - 80px);object-fit:contain;border-radius:6px}
-.lightbox .caption{color:#ddd;font-size:0.95rem;opacity:.9}
-.lightbox .close{position:absolute;top:-10px;right:-10px;background:var(--accent);color:#111;border:none;border-radius:50%;width:42px;height:42px;cursor:pointer;font-size:18px;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,0.5)}
-
-@media (max-width:640px){
-  .gallery-grid img{height:160px}
-  .brand h1{font-size:1rem}
-  .top-nav ul{flex-wrap:wrap;gap:.5rem}
-}
-/* --- Social media icons --- */
-.site-footer .socials img {
-  width: 36px;
-  height: 36px;
-  margin: 0 10px;
-  filter: grayscale(100%) brightness(0.8);
-  transition: all 0.3s ease;
+  --accent:#ff6600;
+  --bg:#0f0f0f;
+  --text:#eaeaea;
+  --panel:#1a1a1a;
+  font-family: system-ui, sans-serif;
 }
 
-.site-footer .socials img:hover {
-  transform: scale(1.15);
-  filter: brightness(1.1) drop-shadow(0 0 4px orange);
-}
-/* --- Serduszka --- */
-.like-btn {
-  font-size: 18px;
-  color: #ff6600;
-  text-align: center;
-  cursor: pointer;
-  margin-top: 6px;
-  transition: transform 0.2s;
-  user-select: none;
-}
+body{background:var(--bg);color:var(--text);margin:0;padding:0;}
+.container{max-width:1100px;margin:auto;padding:1rem;}
+h1,h2{color:var(--accent);}
+.top-nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:1rem;padding:0;}
+.top-nav a{color:#ddd;text-decoration:none;}
+.top-nav a:hover,.top-nav a.active{color:var(--accent);}
+.hero-logo{display:block;margin:2rem auto;max-width:200px;}
+.gallery-preview .imgwrap img{width:100%;border-radius:10px;cursor:pointer;}
+.site-footer{background:var(--panel);padding:1rem 0;text-align:center;margin-top:2rem;}
+.site-footer .socials img{width:36px;height:36px;margin:0 10px;filter:grayscale(100%) brightness(0.8);transition:all .3s ease;}
+.site-footer .socials img:hover{transform:scale(1.15);filter:brightness(1.1) drop-shadow(0 0 4px var(--accent));}
 
-.like-btn:hover {
-  transform: scale(1.2);
+/* --- Lajki --- */
+.like-btn, .like-btn-lightbox{
+  font-size:18px;
+  color:var(--accent);
+  text-align:center;
+  cursor:pointer;
+  margin-top:6px;
+  transition:transform .2s;
+  user-select:none;
 }
+.like-btn:hover, .like-btn-lightbox:hover{transform:scale(1.2);}
+.like-btn.liked, .like-btn-lightbox.liked{color:#ff3300;}
 
-.like-btn.liked {
-  color: #ff3300;
-}
+/* --- Lightbox --- */
+.lightbox{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.9);align-items:center;justify-content:center;flex-direction:column;}
+.lightbox img{max-width:90%;max-height:80%;margin:auto;display:block;}
+.lightbox .close{position:absolute;top:20px;right:35px;color:#fff;font-size:40px;cursor:pointer;}
+.like-btn-lightbox{position:absolute;bottom:20px;right:20px;font-size:24px;display:flex;align-items:center;gap:5px;}
