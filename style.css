@@ -30,3 +30,16 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Segoe UI,
   .brand h1{font-size:1rem}
   .top-nav ul{flex-wrap:wrap;gap:.5rem}
 }
+/* --- Social media icons --- */
+.site-footer .socials img {
+  width: 36px;
+  height: 36px;
+  margin: 0 10px;
+  filter: grayscale(100%) brightness(0.8);
+  transition: all 0.3s ease;
+}
+
+.site-footer .socials img:hover {
+  transform: scale(1.15);
+  filter: brightness(1.1) drop-shadow(0 0 4px orange);
+}
