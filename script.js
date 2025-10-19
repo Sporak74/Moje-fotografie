@@ -1,65 +1,64 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const navLinks = document.querySelectorAll('.top-nav a');
-  const path = window.location.pathname.split('/').pop();
-  navLinks.forEach(a => {
-    if(a.getAttribute('href') === path) a.classList.add('active');
-  });
-
-  const images = document.querySelectorAll('.gallery-grid img');
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.querySelector('#lightbox img');
-  const captionEl = document.querySelector('#lightbox .caption');
-  const closeBtn = document.querySelector('#lightbox .close');
-  let lastScroll = 0;
-
-  function openLightbox(src, caption){
-    lastScroll = window.scrollY || window.pageYOffset;
-    document.body.style.top = `-${lastScroll}px`;
-    document.body.style.position = 'fixed';
-    document.body.style.left = '0';
-    document.body.style.right = '0';
-    lightboxImg.src = src;
-    captionEl.textContent = caption || '';
-    lightbox.style.display = 'flex';
-    lightboxImg.style.maxHeight = '90vh';
-    lightboxImg.style.maxWidth = '90vw';
-    closeBtn.focus();
-  }
-
-  function closeLightbox(){
-    lightbox.style.display = 'none';
-    document.body.style.position = '';
-    document.body.style.top = '';
-    window.scrollTo(0, lastScroll);
-  }
-
-  images.forEach(img => {
-    img.addEventListener('click', (e) => {
-      const src = img.getAttribute('data-full') || img.src;
-      const caption = img.getAttribute('alt') || '';
-      openLightbox(src, caption);
-    });
-  });
-
-  closeBtn.addEventListener('click', closeLightbox);
-  lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
-  document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && lightbox.style.display === 'flex') closeLightbox(); });
+// --- Nawigacja mobilna ---
+document.getElementById('nav-toggle').addEventListener('click', ()=>{
+  document.getElementById('top-nav').classList.toggle('open');
 });
-// --- Lajki (serduszka) ---
-document.addEventListener("DOMContentLoaded", () => {
-  const likeButtons = document.querySelectorAll(".like-btn");
 
-  likeButtons.forEach(btn => {
-    const imgId = btn.dataset.id;
-    const countEl = btn.querySelector(".like-count");
-    let likes = localStorage.getItem(`likes_${imgId}`) || 0;
-    countEl.textContent = likes;
+// --- Lightbox ---
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const likeBtnLightbox = document.querySelector('.like-btn-lightbox');
 
-    btn.addEventListener("click", () => {
-      likes = parseInt(likes) + 1;
-      localStorage.setItem(`likes_${imgId}`, likes);
-      countEl.textContent = likes;
-      btn.classList.add("liked");
+document.querySelectorAll('.gallery-preview .imgwrap img').forEach(img => {
+  img.addEventListener('click', () => {
+    lightbox.style.display = 'flex';
+    lightboxImg.src = img.src;
+    const id = img.alt + '_' + img.src; // unikalny ID zdjęcia
+    likeBtnLightbox.dataset.id = id;
+    let likes = localStorage.getItem(id) || 0;
+    likeBtnLightbox.querySelector('.like-count').textContent = likes;
+    likeBtnLightbox.classList.toggle('liked', likes > 0);
+  });
+});
+
+document.querySelector('.lightbox .close').addEventListener('click', () => {
+  lightbox.style.display = 'none';
+});
+
+// --- Lajki ---
+document.addEventListener('DOMContentLoaded', () => {
+  // pod miniaturami
+  document.querySelectorAll('.gallery-preview .imgwrap img').forEach(img => {
+    const likeDiv = document.createElement('div');
+    const id = img.alt + '_' + img.src;
+    likeDiv.className = 'like-btn';
+    likeDiv.dataset.id = id;
+    likeDiv.innerHTML = '❤️ <span class="like-count">' + (localStorage.getItem(id)||0) + '</span>';
+    img.parentNode.after(likeDiv);
+
+    likeDiv.addEventListener('click', () => {
+      let likes = parseInt(localStorage.getItem(id) || 0) + 1;
+      localStorage.setItem(id, likes);
+      likeDiv.querySelector('.like-count').textContent = likes;
+      likeDiv.classList.add('liked');
     });
+  });
+
+  // w lightboxie
+  likeBtnLightbox.addEventListener('click', () => {
+    const id = likeBtnLightbox.dataset.id;
+    let likes = parseInt(localStorage.getItem(id) || 0) + 1;
+    localStorage.setItem(id, likes);
+    likeBtnLightbox.querySelector('.like-count').textContent = likes;
+    likeBtnLightbox.classList.add('liked');
+
+    // synchronizacja z miniaturą
+    const thumb = document.querySelector('.gallery-preview .imgwrap img[src="'+lightboxImg.src+'"]');
+    if(thumb){
+      const likeDiv = thumb.parentNode.nextElementSibling;
+      if(likeDiv && likeDiv.classList.contains('like-btn')){
+        likeDiv.querySelector('.like-count').textContent = likes;
+        likeDiv.classList.add('liked');
+      }
+    }
   });
 });
