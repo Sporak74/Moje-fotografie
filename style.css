@@ -7,7 +7,7 @@
 }
 
 body{background:var(--bg);color:var(--text);margin:0;padding:0;}
-.container{max-width:100px;margin:auto;padding:1rem;}
+.container{max-width:1000px;margin:auto;padding:1rem;}
 h1,h2{color:var(--accent);}
 .top-nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:1rem;padding:0;}
 .top-nav a{color:#ddd;text-decoration:none;}
