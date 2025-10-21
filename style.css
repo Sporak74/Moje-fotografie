@@ -1,0 +1,33 @@
+
+:root{--accent:#ff7a00;--bg:#0f0f0f;--text:#eaeaea;--panel:#121212;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--text);margin:0;font-family:Inter,system-ui,sans-serif}
+.container{max-width:1100px;margin:0 auto;padding:1rem}
+.site-header{position:sticky;top:0;background:linear-gradient(rgba(10,10,10,0.6),rgba(20,20,20,0.3));padding:10px 0;z-index:100}
+.header-inner{display:flex;justify-content:space-between;align-items:center}
+.brand h1{margin:0;color:var(--accent);font-size:1.05rem}
+.tagline{margin:0;color:#bfbfbf;font-size:0.95rem}
+.top-nav ul{display:flex;gap:0.6rem;list-style:none;margin:0;padding:0}
+.top-nav a{color:var(--text);text-decoration:none;padding:0.3rem 0.6rem;border-radius:6px}
+.top-nav a:hover,.top-nav a.active{background:rgba(255,122,0,0.08);color:var(--accent)}
+.hero{padding:20px 0;text-align:center}
+.hero-logo{max-width:260px;width:100%;height:auto;display:block;margin:0 auto}
+.hero-welcome{color:rgba(255,255,255,0.9);margin-top:8px}
+.about{margin:1.2rem 0}
+.grid-preview,.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.card,.preview-card{background:var(--panel);padding:8px;border-radius:8px;display:flex;flex-direction:column;align-items:center}
+.imgwrap{width:100%;display:block;overflow:hidden}
+.imgwrap img{width:100%;height:auto;max-width:250px;border-radius:6px;transition:transform .28s,opacity .4s;opacity:0;}
+.imgwrap img.loaded{opacity:1}
+.like-btn{margin-top:8px;cursor:pointer;color:var(--accent);display:inline-flex;align-items:center;gap:6px;font-size:16px}
+.like-btn.liked{color:#ff3300}
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:2000;align-items:center;justify-content:center;padding:20px}
+.lightbox .inner{position:relative;max-width:95%;max-height:95%;display:flex;flex-direction:column;align-items:center;gap:8px}
+.lightbox img{max-width:calc(100vw - 120px);max-height:calc(100vh - 160px);object-fit:contain;border-radius:6px}
+.lightbox .close{position:absolute;top:12px;right:12px;background:transparent;border:none;color:#fff;font-size:28px;cursor:pointer}
+.like-btn-lightbox{position:absolute;bottom:26px;right:26px;background:rgba(0,0,0,0.35);padding:8px 12px;border-radius:40px;display:inline-flex;align-items:center;gap:8px;color:var(--accent);cursor:pointer}
+.like-btn-lightbox.liked{color:#ff3300}
+.site-footer{background:linear-gradient(180deg,#0b0b0b,var(--panel));padding:14px 0;margin-top:24px;text-align:center}
+.site-footer .socials img{width:40px;height:40px;margin:0 8px;filter:grayscale(100%) brightness(0.85);transition:all .25s}
+.site-footer .socials img:hover{transform:scale(1.12);filter:brightness(1.05)}
+@media (max-width:800px){.imgwrap img{max-width:200px};.grid-preview{grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}}
