@@ -4,7 +4,6 @@
 .site-header{position:sticky;top:0;background:linear-gradient(rgba(10,10,10,0.65), rgba(16,16,16,0.25));padding:10px 0;z-index:60}
 .header-inner{display:flex;align-items:center;gap:16px}
 .header-left{display:flex;align-items:center;gap:12px}
-.logo-small{height:56px;width:auto;display:block}
 /* --- Duże logo w sekcji powitalnej --- */
 .logo-big {
   display: block;
