@@ -34,3 +34,63 @@
 .site-footer .socials img{width:24px;height:24px;margin:0 8px;filter:grayscale(100%) brightness(0.9);transition:all .25s ease}
 .site-footer .socials img:hover{transform:scale(1.1);filter:brightness(1.05)}
 @media (max-width:800px){ .site-title{font-size:1.25rem} .imgwrap img{max-width:200px} .grid-preview{grid-template-columns:repeat(auto-fit,minmax(140px,1fr))} .top-nav ul{display:none} .top-nav.open ul{display:flex;flex-direction:column;background:rgba(0,0,0,0.5);padding:8px;border-radius:6px} }
+/* --- HAMBURGER MENU --- */
+.menu-toggle {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 32px;
+  height: 28px;
+  margin-left: auto;
+}
+
+.menu-toggle span {
+  width: 24px;
+  height: 3px;
+  background: var(--text);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* Animacja przy otwartym menu */
+.menu-toggle.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.menu-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* --- MOBILE STYLES --- */
+@media (max-width: 800px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .top-nav ul {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    background: rgba(0,0,0,0.85);
+    flex-direction: column;
+    padding: 10px 16px;
+    border-radius: 8px;
+    gap: 10px;
+    backdrop-filter: blur(4px);
+  }
+
+  .top-nav.open ul {
+    display: flex;
+  }
+
+  .top-nav a {
+    padding: 10px 16px;
+    font-size: 1rem;
+  }
+}
