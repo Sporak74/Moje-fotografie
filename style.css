@@ -5,7 +5,7 @@
 .header-inner{display:flex;align-items:center;gap:16px}
 .header-left{display:flex;align-items:center;gap:12px}
 .logo-small{height:180px;width:auto}
-.site-title;{font-size:2.4rem;margin:0;color:var(--accent);font-weight:700}
+.site-title{font-size:2.4rem;margin:0;color:var(--accent);font-weight:700}
 .site-sub{font-size:0.95rem;color:var(--muted);margin-top:2px}
 .top-nav{margin-left:auto}
 .top-nav ul{display:flex;gap:0.6rem;align-items:center;list-style:none;padding:0;margin:0}
