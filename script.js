@@ -98,3 +98,11 @@ likeBtnLightbox.addEventListener('click', () => {
     }
   }
 });
+// menu mobilne
+const menuToggle = document.getElementById('menuToggle');
+const topNav = document.querySelector('.top-nav');
+
+menuToggle.addEventListener('click', () => {
+  topNav.classList.toggle('open');
+  menuToggle.classList.toggle('open');
+});
