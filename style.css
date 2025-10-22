@@ -4,7 +4,7 @@
 .site-header{position:sticky;top:0;background:linear-gradient(rgba(10,10,10,0.65), rgba(16,16,16,0.25));padding:10px 0;z-index:60}
 .header-inner{display:flex;align-items:center;gap:16px}
 .header-left{display:flex;align-items:center;gap:12px}
-.logo-small{height:180px;width:auto;}
+.logo-small{height:180px;width:auto}
 .site-title{font-size:2.4rem;margin:0;color:var(--accent);font-weight:700}
 .site-sub{font-size:0.95rem;color:var(--muted);margin-top:2px}
 .top-nav{margin-left:auto}
